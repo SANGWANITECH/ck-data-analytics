@@ -3,19 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail, Phone } from "lucide-react";
 import { Logo } from "./logo";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navItems = [
-  { href: "/", label: "Home", num: "01" },
-  { href: "/services/", label: "Services", num: "02" },
-  { href: "/about/", label: "About", num: "03" },
-  { href: "/insights/", label: "Insights", num: "04" },
-  { href: "/contact/", label: "Contact", num: "05" },
-];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -128,7 +120,7 @@ export function Navbar() {
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-[85%] max-w-[360px] bg-white shadow-2xl md:hidden flex flex-col"
             >
-              {/* Drawer Header — Clean, no logo repetition */}
+              {/* Drawer Header */}
               <div className="flex items-center justify-between px-6 h-[72px] border-b border-[rgba(0,0,0,0.08)]">
                 <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-lightgray">
                   Menu
@@ -145,7 +137,7 @@ export function Navbar() {
 
               {/* Drawer Nav Links */}
               <nav className="flex-1 px-6 py-8 flex flex-col gap-1" aria-label="Mobile">
-                {navItems.map((item, i) => {
+                {site.nav.map((item, i) => {
                   const active =
                     item.href === "/"
                       ? pathname === "/"
@@ -169,7 +161,7 @@ export function Navbar() {
                           "text-[11px] font-bold tracking-widest transition-colors",
                           active ? "text-emerald" : "text-lightgray group-hover:text-emerald"
                         )}>
-                          {item.num}
+                          {String(i + 1).padStart(2, "0")}
                         </span>
                         <span className="text-xl font-semibold">
                           {item.label}
@@ -200,17 +192,18 @@ export function Navbar() {
 
                 <div className="space-y-3">
                   <a
-                    href="mailto:info@ckdataanalytics.com"
+                    href="mailto:ckdataanalytics@gmail.com"
                     className="flex items-center gap-3 text-sm text-warmgray hover:text-emerald transition-colors"
                   >
                     <Mail className="h-4 w-4 shrink-0" />
-                    info@ckdataanalytics.com
+                    ckdataanalytics@gmail.com
                   </a>
+                
                   <p className="flex items-center gap-3 text-sm text-warmgray">
                     <span className="h-4 w-4 shrink-0 rounded-full border border-warmgray/30 flex items-center justify-center text-[8px] font-bold">
                       MW
                     </span>
-                    Lilongwe, Malawi
+                    Blantyre, Malawi
                   </p>
                 </div>
               </motion.div>
