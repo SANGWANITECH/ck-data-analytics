@@ -64,7 +64,7 @@ function Hero() {
         </div>
 
         <HeroReveal delay={0.25} className="relative">
-          <div className="aspect-[5/4] sm:aspect-square w-full max-w-[420px] rounded-card border border-[rgba(0,0,0,0.08)] bg-card p-6 sm:p-8 shadow-[0_24px_60px_-28px_rgba(15,23,42,0.18)] mx-auto">
+          <div className="w-full max-w-[420px] rounded-card border border-[rgba(0,0,0,0.08)] bg-card p-6 sm:p-8 shadow-[0_24px_60px_-28px_rgba(15,23,42,0.18)] mx-auto">
             <StatCard />
           </div>
         </HeroReveal>
