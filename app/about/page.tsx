@@ -38,6 +38,7 @@ export default function AboutPage() {
       <VisionMission />
       <OurStory />
       <TeamSection />
+      
     </>
   );
 }
@@ -47,7 +48,7 @@ function VisionMission() {
     <section className="section-pad bg-card">
       <div className="container-page">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Reveal>
+          <Reveal direction="left">
             <div className="card-base border-l-4 border-l-emerald h-full">
               <span className="label block mb-4">Our Vision</span>
               <h3 className="h2 text-navy mb-4">Leading Research in Malawi</h3>
@@ -58,7 +59,7 @@ function VisionMission() {
               </p>
             </div>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal direction="right" delay={0.1}>
             <div className="card-base border-l-4 border-l-emerald h-full">
               <span className="label block mb-4">Our Mission</span>
               <h3 className="h2 text-navy mb-4">Transforming Data into Knowledge</h3>
@@ -80,10 +81,12 @@ function OurStory() {
   return (
     <section className="section-pad bg-paper">
       <div className="container-page max-w-[720px] mx-auto text-center">
-        <Reveal className="flex flex-col gap-6">
+        <Reveal className="flex flex-col gap-6 items-center">
           <span className="label">Our Story</span>
           <h2 className="h2 text-navy">From observation to action</h2>
-          <div className="flex flex-col gap-5 text-left">
+        </Reveal>
+        <Stagger className="flex flex-col gap-5 text-left mt-6" gap={0.15}>
+          <StaggerItem>
             <p className="body-text text-warmgray">
               CK Data & Analytics was founded by a team of university-trained
               statisticians and technologists who recognized a critical gap in
@@ -91,14 +94,16 @@ function OurStory() {
               support planning and decision-making, but access to quality
               research services was limited and expensive.
             </p>
+          </StaggerItem>
+          <StaggerItem>
             <p className="body-text text-warmgray">
               We set out to build a company that combines fieldwork capability,
               statistical rigor, and digital technology all under one roof.
               Our team brings together expertise in research methodology, data
               science, and information technology.
             </p>
-          </div>
-        </Reveal>
+          </StaggerItem>
+        </Stagger>
       </div>
     </section>
   );
@@ -108,12 +113,16 @@ function TeamSection() {
   return (
     <section className="section-pad bg-card">
       <div className="container-page">
-        <Reveal className="text-center mb-14">
+        <Reveal className="text-center mb-14 sm:mb-16">
           <span className="label block mb-4">Our Team</span>
           <h2 className="h2 text-navy">The people behind the data</h2>
+          <p className="body-text text-warmgray mt-4 max-w-[520px] mx-auto">
+            A focused team of researchers, statisticians, and technologists
+            committed to quality evidence.
+          </p>
         </Reveal>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {team.map((member) => (
             <StaggerItem key={member.name}>
               <TeamCard
@@ -130,7 +139,6 @@ function TeamSection() {
     </section>
   );
 }
-
 function PrinciplesSection() {
   return (
     <section className="section-pad bg-navy">
@@ -140,9 +148,9 @@ function PrinciplesSection() {
           <h2 className="h2 text-white">Our Operating Principles</h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {principles.map((p, i) => (
-            <Reveal key={p.num} delay={i * 0.1}>
+        <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {principles.map((p) => (
+            <StaggerItem key={p.num}>
               <div className="flex flex-col gap-4">
                 <span className="text-[48px] font-bold leading-none text-emerald">
                   {p.num}
@@ -154,9 +162,9 @@ function PrinciplesSection() {
                   {p.description}
                 </p>
               </div>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

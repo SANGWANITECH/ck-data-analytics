@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Mail, Phone } from "lucide-react";
-import { Logo } from "./logo";
+import { Menu, X, Mail } from "lucide-react";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -44,10 +44,21 @@ export function Navbar() {
           scrolled && "shadow-[0_6px_20px_-12px_rgba(15,23,42,0.16)]"
         )}
       >
-        <div className="container-page flex h-[72px] items-center justify-between">
-          <Link href="/" className="shrink-0" aria-label="CK Data and Analytics home">
-            <Logo />
-          </Link>
+  <div className="container-page flex h-[72px] items-center justify-between !px-3 md:!px-6 lg:!px-8">
+  <Link
+    href="/"
+    className="shrink-0 flex items-center"
+    aria-label="CK Data and Analytics home"
+  >
+    <Image
+      src="/logo.png"
+      alt="CK Data and Analytics"
+      width={280}
+      height={80}
+      className="h-22 w-auto object-contain md:h-30"
+      priority
+    />
+  </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
@@ -136,7 +147,10 @@ export function Navbar() {
               </div>
 
               {/* Drawer Nav Links */}
-              <nav className="flex-1 px-6 py-8 flex flex-col gap-1" aria-label="Mobile">
+              <nav
+                className="flex-1 px-6 py-8 flex flex-col gap-1"
+                aria-label="Mobile"
+              >
                 {site.nav.map((item, i) => {
                   const active =
                     item.href === "/"
@@ -154,13 +168,19 @@ export function Navbar() {
                         onClick={() => setOpen(false)}
                         className={cn(
                           "group flex items-center gap-4 py-4 border-b border-[rgba(0,0,0,0.06)] transition-colors",
-                          active ? "text-emerald" : "text-navy hover:text-emerald"
+                          active
+                            ? "text-emerald"
+                            : "text-navy hover:text-emerald"
                         )}
                       >
-                        <span className={cn(
-                          "text-[11px] font-bold tracking-widest transition-colors",
-                          active ? "text-emerald" : "text-lightgray group-hover:text-emerald"
-                        )}>
+                        <span
+                          className={cn(
+                            "text-[11px] font-bold tracking-widest transition-colors",
+                            active
+                              ? "text-emerald"
+                              : "text-lightgray group-hover:text-emerald"
+                          )}
+                        >
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span className="text-xl font-semibold">
@@ -189,7 +209,6 @@ export function Navbar() {
                 >
                   Get in Touch
                 </Link>
-
                 <div className="space-y-3">
                   <a
                     href="mailto:ckdataanalytics@gmail.com"
@@ -198,7 +217,6 @@ export function Navbar() {
                     <Mail className="h-4 w-4 shrink-0" />
                     ckdataanalytics@gmail.com
                   </a>
-                
                   <p className="flex items-center gap-3 text-sm text-warmgray">
                     <span className="h-4 w-4 shrink-0 rounded-full border border-warmgray/30 flex items-center justify-center text-[8px] font-bold">
                       MW

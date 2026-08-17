@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./logo";
+import Image from "next/image";
 import { Reveal } from "./reveal";
 
 const serviceLinks = [
@@ -23,15 +23,21 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Brand */}
             <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-4">
-  <Logo variant="light" />
-</Link>
+              <Link href="/" className="inline-block mb-5">
+                <Image
+                  src="/logo2.png"
+                  alt="CK Data and Analytics"
+                  width={200}
+                  height={60}
+                  className="h-22 w-auto object-contain brightness-0 invert"
+                />
+              </Link>
               <p className="text-sm text-white/50 leading-relaxed mb-2">
                 Evidence for Progress
               </p>
               <p className="text-sm text-white/40 leading-relaxed">
-                Professional research and data solutions for organizations driving
-                development in Malawi.
+                Professional research and data solutions for organizations
+                driving development in Malawi.
               </p>
             </div>
 
@@ -91,7 +97,17 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="mailto:info@ckdataanalytics.com"
+                    href="https://www.facebook.com/profile.php?id=61593348146353"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[15px] text-white/70 hover:text-white transition-colors duration-200"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:ckdataanalytics@gmail.com"
                     className="text-[15px] text-white/70 hover:text-white transition-colors duration-200"
                   >
                     Email
@@ -108,8 +124,7 @@ export function Footer() {
             © 2026 CK Data & Analytics. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-         
-              <a
+            <a
               href="https://ram-techs.online"
               target="_blank"
               rel="noopener noreferrer"

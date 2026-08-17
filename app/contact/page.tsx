@@ -14,7 +14,7 @@ const serviceOptions = [
 ];
 
 const inputClass =
-  "w-full rounded-btn border border-[rgba(0,0,0,0.12)] bg-white px-4 py-3.5 text-[16px] text-charcoal placeholder:text-[#a8a29e] transition-shadow duration-200 focus:outline-none focus:border-emerald focus:shadow-[0_0_0_3px_rgba(5,150,105,0.1)]";
+  "w-full rounded-xl border border-[rgba(0,0,0,0.12)] bg-white px-4 py-3.5 text-[16px] text-charcoal placeholder:text-[#a8a29e] transition-all duration-200 focus:outline-none focus:border-emerald focus:shadow-[0_0_0_3px_rgba(5,150,105,0.12)]";
 
 export default function ContactPage() {
   return (
@@ -25,7 +25,6 @@ export default function ContactPage() {
         title="Let's Work Together"
         description="Tell us about your project. We typically respond within 24 hours."
       />
-
       <ContactSection />
     </>
   );
@@ -48,6 +47,7 @@ function ContactSection() {
   );
 }
 
+/* ======================= FORM ======================= */
 function ContactForm() {
   const [form, setForm] = useState({
     fullName: "",
@@ -90,7 +90,10 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card-base flex flex-col gap-5">
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 sm:p-8 flex flex-col gap-5 shadow-sm"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Full Name" required>
           <input
@@ -102,6 +105,7 @@ function ContactForm() {
             className={inputClass}
           />
         </Field>
+
         <Field label="Organization" required>
           <input
             type="text"
@@ -126,6 +130,7 @@ function ContactForm() {
             className={inputClass}
           />
         </Field>
+
         <Field label="Phone Number">
           <input
             type="tel"
@@ -167,7 +172,10 @@ function ContactForm() {
         />
       </Field>
 
-      <button type="submit" className="btn-primary justify-center w-full sm:w-auto mt-2">
+      <button
+        type="submit"
+        className="btn-primary justify-center w-full sm:w-auto mt-2"
+      >
         Send Message
         <Send className="h-4 w-4" />
       </button>
@@ -201,10 +209,12 @@ function Field({
   );
 }
 
+/* ======================= CONTACT INFO ======================= */
 function ContactInfo() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="card-base flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
+      {/* Contact Details */}
+      <div className="rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 sm:p-7 flex flex-col gap-6 shadow-sm">
         <h3 className="h3 text-navy">Contact Information</h3>
 
         <InfoRow
@@ -232,12 +242,13 @@ function ContactInfo() {
         />
       </div>
 
-      <div className="card-base flex flex-col gap-4">
+      {/* Company Profile */}
+      <div className="rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 sm:p-7 flex flex-col gap-4 shadow-sm">
         <h3 className="h3 text-navy">Download Our Profile</h3>
         <p className="text-[14px] text-warmgray leading-relaxed">
           Learn more about our services and capabilities.
         </p>
-         <a
+        <a
           href="/CK-Data-Analytics-Company-Profile.pdf"
           download
           className="btn-secondary w-fit"
@@ -246,21 +257,32 @@ function ContactInfo() {
         </a>
       </div>
 
-      <div className="card-base flex flex-col gap-3 bg-navy border-none">
-        <span className="label-light">Connect</span>
+      {/* Connect / Socials */}
+      <div className="rounded-2xl bg-navy p-6 sm:p-7 flex flex-col gap-5">
+        <span className="label-light">Connect with us</span>
         <p className="text-[14px] text-white/70 leading-relaxed">
           Follow CK Data & Analytics for updates on published research and
           ongoing studies.
         </p>
 
-         <a
-          href="https://linkedin.com/company/ckdataanalytics"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[14px] font-semibold text-emerald hover:underline w-fit"
-        >
-          LinkedIn →
-        </a>
+        <div className="flex flex-col gap-3">
+          <a
+            href="https://linkedin.com/company/ckdataanalytics"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[14px] font-semibold text-emerald hover:text-white transition-colors"
+          >
+            LinkedIn →
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61593348146353"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[14px] font-semibold text-emerald hover:text-white transition-colors"
+          >
+            Facebook →
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -279,7 +301,7 @@ function InfoRow({
 }) {
   const content = (
     <div className="flex items-start gap-4">
-      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-btn bg-emerald-tint text-emerald">
+      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald">
         <Icon className="h-[18px] w-[18px]" />
       </span>
       <div className="flex flex-col gap-0.5 pt-1.5">
@@ -292,7 +314,10 @@ function InfoRow({
   );
 
   return href ? (
-    <a href={href} className="group -m-2 rounded-btn p-2 transition-colors hover:bg-emerald-tint/40">
+    <a
+      href={href}
+      className="group -m-2 rounded-xl p-2 transition-colors hover:bg-emerald-50/60"
+    >
       {content}
     </a>
   ) : (

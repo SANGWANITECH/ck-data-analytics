@@ -38,7 +38,6 @@ export default function InsightsPage() {
         title="Our Work"
         description="Evidence-based research and data stories from our projects."
       />
-
       <Methodology />
       <FeaturedWork />
       <CTASection />
@@ -46,6 +45,7 @@ export default function InsightsPage() {
   );
 }
 
+/* ======================= METHODOLOGY ======================= */
 function Methodology() {
   return (
     <section className="section-pad bg-paper">
@@ -59,20 +59,26 @@ function Methodology() {
 
         <div className="relative">
           <ProcessFlowLine />
-          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {methodology.map((step) => (
               <StaggerItem key={step.num}>
-                <div className="flex flex-col gap-4">
+                <div className="group relative flex flex-col gap-5 rounded-2xl border border-[rgba(0,0,0,0.06)] bg-white p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-[0_20px_40px_-20px_rgba(15,23,42,0.12)]">
                   <div className="flex items-center gap-4">
-                    <span className="text-[40px] font-bold leading-none text-emerald">
+                    <span className="text-[42px] font-bold leading-none text-emerald transition-transform duration-300 group-hover:scale-105">
                       {step.num}
                     </span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-btn bg-emerald-tint text-emerald">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald transition-all duration-300 group-hover:bg-emerald group-hover:text-white">
                       <step.icon className="h-5 w-5" />
                     </span>
                   </div>
-                  <h3 className="h3 text-navy">{step.title}</h3>
-                  <p className="body-text text-warmgray">{step.description}</p>
+
+                  <div>
+                    <h3 className="h3 text-navy mb-2">{step.title}</h3>
+                    <p className="body-text text-warmgray text-[15px] leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
@@ -83,6 +89,7 @@ function Methodology() {
   );
 }
 
+/* ======================= FEATURED WORK ======================= */
 function FeaturedWork() {
   return (
     <section className="section-pad bg-card">
@@ -97,7 +104,7 @@ function FeaturedWork() {
         {insights.length === 0 ? (
           <EmptyState />
         ) : (
-          <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
             {insights.map((project) => (
               <StaggerItem key={project.id}>
                 <ProjectCard project={project} />
@@ -110,6 +117,7 @@ function FeaturedWork() {
   );
 }
 
+/* ======================= PROJECT CARD ======================= */
 function ProjectCard({ project }: { project: (typeof insights)[0] }) {
   const statusLabel = {
     planned: "Planned",
@@ -119,28 +127,43 @@ function ProjectCard({ project }: { project: (typeof insights)[0] }) {
 
   const statusClass = {
     planned: "bg-[rgba(0,0,0,0.05)] text-warmgray",
-    "in-progress": "bg-[rgba(217,119,6,0.1)] text-gold",
-    published: "bg-emerald-tint text-emerald",
+    "in-progress": "bg-[rgba(217,119,6,0.12)] text-amber-700",
+    published: "bg-emerald-50 text-emerald",
   }[project.status];
 
   const content = (
-    <div className="card-base card-hover flex h-full flex-col gap-4">
-      <span className="inline-flex w-fit items-center px-3 py-1.5 rounded-pill bg-emerald-tint text-emerald text-[12px] font-semibold uppercase tracking-[0.05em]">
-        {project.category}
-      </span>
-      <h3 className="h3 text-navy">{project.title}</h3>
-      <p className="body-text text-warmgray text-[15px]">{project.description}</p>
-      <div className="mt-auto flex items-center justify-between pt-2">
+    <div className="group relative flex h-full flex-col gap-5 rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald/35 hover:shadow-[0_22px_44px_-20px_rgba(15,23,42,0.15)]">
+      {/* Category + Status */}
+      <div className="flex items-center justify-between gap-3">
+        <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-emerald-50 text-emerald text-[12px] font-semibold uppercase tracking-[0.04em]">
+          {project.category}
+        </span>
         <span
-          className={`inline-flex items-center px-2.5 py-1 rounded-pill text-[11px] font-semibold uppercase tracking-[0.05em] ${statusClass}`}
+          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.04em] ${statusClass}`}
         >
           {statusLabel}
         </span>
-        {project.href && (
-          <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-emerald">
+      </div>
+
+      {/* Title + Description */}
+      <div className="flex flex-col gap-3">
+        <h3 className="h3 text-navy transition-colors duration-300 group-hover:text-emerald">
+          {project.title}
+        </h3>
+        <p className="body-text text-warmgray text-[15px] leading-relaxed">
+          {project.description}
+        </p>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-auto flex items-center justify-between pt-1">
+        {project.href ? (
+          <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-emerald transition-all duration-300 group-hover:gap-2.5">
             Read more
             <ArrowRight className="h-4 w-4" />
           </span>
+        ) : (
+          <span className="text-[13px] text-warmgray/70">Coming soon</span>
         )}
       </div>
     </div>
@@ -155,22 +178,29 @@ function ProjectCard({ project }: { project: (typeof insights)[0] }) {
   );
 }
 
+/* ======================= EMPTY STATE ======================= */
 function EmptyState() {
   return (
-    <Reveal className="flex flex-col items-center text-center gap-5 max-w-[480px] mx-auto py-8">
+    <Reveal className="flex flex-col items-center text-center gap-6 max-w-[480px] mx-auto py-10">
       <div className="relative flex items-center justify-center h-20 w-20">
         <span className="absolute inset-0 rounded-full bg-emerald/10 animate-ping [animation-duration:2.5s]" />
-        <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-tint text-emerald">
+        <span className="relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald">
           <FileSearch className="h-6 w-6" />
         </span>
       </div>
-      <h3 className="h3 text-navy">No published research yet</h3>
-      
-       <a
+
+      <div className="space-y-2">
+        <h3 className="h3 text-navy">No published research yet</h3>
+        <p className="body-text text-warmgray text-[15px]">
+          We’re currently working on our first studies. Follow us for updates.
+        </p>
+      </div>
+
+      <a
         href="https://linkedin.com/company/ckdataanalytics"
         target="_blank"
         rel="noopener noreferrer"
-        className="btn-secondary mt-2"
+        className="btn-secondary mt-1"
       >
         Follow our progress on LinkedIn
       </a>
@@ -178,6 +208,7 @@ function EmptyState() {
   );
 }
 
+/* ======================= CTA ======================= */
 function CTASection() {
   return (
     <section className="section-pad bg-navy">

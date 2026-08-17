@@ -1,10 +1,15 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { HeroReveal, Reveal, Stagger, StaggerItem } from "@/components/site/reveal";
+import {
+  HeroReveal,
+  Reveal,
+  Stagger,
+  StaggerItem,
+} from "@/components/site/reveal";
 import { GeometricPattern } from "@/components/site/geometric-pattern";
 import { ServiceIcon } from "@/components/site/service-icon";
 import { SectionHeader } from "@/components/site/section-header";
-import { StatCounter } from "@/components/site/stat-counter";
+import { StatCardInteractive } from "@/components/site/stat-card-interactive";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 import { whyComparisons } from "@/content/content";
@@ -22,21 +27,51 @@ export default function HomePage() {
 }
 
 function Hero() {
+  const stats = [
+    {
+      value: "4",
+      label: "Service areas",
+      detail:
+        "Research, Data Collection, Analysis, and Technology, under one roof.",
+    },
+    {
+      value: String(site.sectors.length),
+      label: "Sectors served",
+      detail:
+        "Government, NGOs, Private Sector, Academia, and Health.",
+    },
+    {
+      value: "2",
+      label: "Studies in progress",
+      detail:
+        "Active research projects currently moving through fieldwork and analysis.",
+    },
+    {
+      value: "100%",
+      label: "Local context",
+      detail:
+        "Built by a Malawian team, for Malawian institutions and communities.",
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-paper pt-[72px]">
       <div className="absolute inset-0 -z-10 opacity-90">
         <GeometricPattern pattern="hero" />
       </div>
+
       <div className="container-page grid grid-cols-1 items-center gap-10 py-16 sm:py-20 lg:py-28 lg:gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="flex flex-col gap-6 sm:gap-7">
           <HeroReveal delay={0}>
             <span className="label">{site.tagline}</span>
           </HeroReveal>
+
           <HeroReveal delay={0.1}>
             <h1 className="display max-w-[640px] text-balance text-navy">
               Reliable data. Trusted insights. Better decisions.
             </h1>
           </HeroReveal>
+
           <HeroReveal delay={0.2}>
             <p className="body-text max-w-[520px] text-warmgray">
               CK Data & Analytics is a Malawian research and data solutions
@@ -44,6 +79,7 @@ function Hero() {
               questions into evidence, and evidence into decisions.
             </p>
           </HeroReveal>
+
           <HeroReveal delay={0.3}>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
               <Link
@@ -65,39 +101,11 @@ function Hero() {
 
         <HeroReveal delay={0.25} className="relative">
           <div className="w-full max-w-[420px] rounded-card border border-[rgba(0,0,0,0.08)] bg-card p-6 sm:p-8 shadow-[0_24px_60px_-28px_rgba(15,23,42,0.18)] mx-auto">
-            <StatCard />
+            <StatCardInteractive stats={stats} />
           </div>
         </HeroReveal>
       </div>
     </section>
-  );
-}
-
-function StatCard() {
-  const stats = [
-    { value: "4", label: "Service areas" },
-    { value: "1", label: "Sectors served" },
-    { value: "2", label: "Studies in progress" },
-    { value: "100%", label: "Local context" },
-  ];
-  return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex items-center justify-between">
-        <span className="label">Snapshot</span>
-        <span className="h-2 w-2 rounded-full bg-gold" />
-      </div>
-      <div className="grid grid-cols-2 gap-5 sm:gap-6 py-6 sm:py-8">
-        {stats.map((s) => (
-          <StatCounter key={s.label} value={s.value} label={s.label} />
-        ))}
-      </div>
-      <div className="rounded-btn border border-[rgba(0,0,0,0.08)] bg-paper p-4 sm:p-5">
-        <p className="text-[13px] sm:text-[14px] leading-[1.6] text-charcoal">
-          From study design to field collection to analysis, built for
-          Malawi, not bolted on.
-        </p>
-      </div>
-    </div>
   );
 }
 
@@ -111,7 +119,11 @@ function TrustBar() {
             partners across Malawi.
           </p>
         </Reveal>
-        <Stagger className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3" gap={0.06}>
+
+        <Stagger
+          className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3"
+          gap={0.06}
+        >
           {site.sectors.map((sector) => (
             <StaggerItem key={sector}>
               <span className="inline-flex items-center rounded-pill border border-white/15 bg-white/5 px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.1em] text-white/85">
@@ -134,21 +146,31 @@ function ServicesOverview() {
           title="Four ways we help you act on evidence"
           description="Each service stands on its own, but most projects draw on several, so your data moves cleanly from collection to decision."
         />
+
         <Stagger className="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
             <StaggerItem key={s.id}>
               <Link
                 href="/services/"
-                className="card-base card-hover group flex h-full flex-col gap-5"
+                className="group relative flex h-full flex-col gap-5 rounded-card border border-[rgba(0,0,0,0.08)] bg-card p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald/30 hover:shadow-[0_20px_40px_-20px_rgba(15,23,42,0.15)]"
               >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-btn bg-emerald-50 text-emerald transition-transform duration-300 group-hover:scale-105">
-                  <ServiceIcon icon={s.icon} className="h-6 w-6" />
+                {/* Icon */}
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald transition-all duration-300 group-hover:bg-emerald group-hover:text-white group-hover:scale-105">
+                  <ServiceIcon icon={s.icon} className="h-5 w-5" />
                 </span>
+
+                {/* Content */}
                 <div className="flex flex-col gap-3">
-                  <h3 className="h3 text-navy">{s.shortTitle || s.title}</h3>
-                  <p className="body-text text-warmgray text-[15px]">{s.shortDescription || s.description}</p>
+                  <h3 className="h3 text-navy group-hover:text-emerald transition-colors duration-300">
+                    {s.shortTitle || s.title}
+                  </h3>
+                  <p className="body-text text-warmgray text-[15px] leading-relaxed">
+                    {s.shortDescription || s.description}
+                  </p>
                 </div>
-                <span className="mt-auto inline-flex items-center gap-1.5 text-[14px] font-semibold text-emerald transition-transform group-hover:translate-x-1">
+
+                {/* Learn more */}
+                <span className="mt-auto inline-flex items-center gap-1.5 text-[14px] font-semibold text-emerald transition-all duration-300 group-hover:gap-2.5">
                   Learn more
                   <ArrowRight className="h-4 w-4" />
                 </span>
@@ -165,7 +187,7 @@ function WhyCKData() {
   return (
     <section className="section-pad bg-card">
       <div className="container-page grid grid-cols-1 gap-12 lg:gap-20 lg:grid-cols-2">
-        <Reveal className="flex flex-col gap-6">
+        <Reveal direction="left" className="flex flex-col gap-6">
           <span className="label">Why CK Data</span>
           <h2 className="h2 text-balance text-navy">
             Malawi has no shortage of data. The gap is in turning it into
@@ -174,9 +196,9 @@ function WhyCKData() {
           <p className="body-text text-warmgray">
             Surveys are run, reports are written, and datasets sit unused.
             Institutions that need evidence most often lack the time, tools, or
-            expertise to analyse what they already hold. CK Data &
-            Analytics exists to close that gap, with rigorous methods, the
-            right technology, and a focus on outputs people can actually use.
+            expertise to analyse what they already hold. CK Data & Analytics
+            exists to close that gap, with rigorous methods, the right
+            technology, and a focus on outputs people can actually use.
           </p>
           <p className="body-text text-warmgray">
             We are local, built for Malawian contexts, and committed to
@@ -184,7 +206,7 @@ function WhyCKData() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        <Reveal direction="right" delay={0.1}>
           <div className="card-base overflow-hidden p-0">
             <div className="grid grid-cols-2 border-b border-[rgba(0,0,0,0.08)] bg-paper">
               <div className="p-4 sm:p-5">
@@ -198,6 +220,7 @@ function WhyCKData() {
                 </span>
               </div>
             </div>
+
             <Stagger className="flex flex-col">
               {whyComparisons.map((row, i) => (
                 <StaggerItem key={i}>
@@ -233,7 +256,10 @@ function CTASection() {
             Tell us about your project, your questions, or the data you already
             hold. We will help you figure out the most useful next step.
           </p>
-          <Link href="/contact/" className="btn-primary w-full sm:w-auto justify-center">
+          <Link
+            href="/contact/"
+            className="btn-primary w-full sm:w-auto justify-center"
+          >
             Get in touch
             <ArrowRight className="h-4 w-4" />
           </Link>

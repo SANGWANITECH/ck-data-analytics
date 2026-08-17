@@ -4,8 +4,10 @@ export const services = [
     label: "RESEARCH",
     title: "Research Services",
     shortTitle: "Research",
-    description: "We design and conduct rigorous research studies including surveys, baseline and endline evaluations, market research, community assessments, and academic research support.",
-    shortDescription: "Rigorous academic and market research tailored to the Malawian context. We design robust methodologies.",
+    description:
+      "We design and conduct rigorous research studies including surveys, baseline and endline evaluations, market research, community assessments, and academic research support.",
+    shortDescription:
+      "Rigorous academic and market research tailored to the Malawian context. We design robust methodologies.",
     capabilities: [
       "Study design & methodology",
       "Survey instrument development",
@@ -14,15 +16,17 @@ export const services = [
       "Fieldwork supervision",
     ],
     tools: ["KoboToolbox", "ODK", "SPSS", "Python"],
-    icon: "ClipboardList",
+    icon: "Search",
   },
   {
     id: "collection",
     label: "FIELDWORK",
     title: "Data Collection",
     shortTitle: "Data Collection",
-    description: "Professional field data collection using digital tools. We recruit and train enumerators, manage interviews, and enforce rigorous data quality verification.",
-    shortDescription: "High-quality qualitative and quantitative data gathering using advanced mobile technologies across all regions.",
+    description:
+      "Professional field data collection using digital tools. We recruit and train enumerators, manage interviews, and enforce rigorous data quality verification.",
+    shortDescription:
+      "High-quality qualitative and quantitative data gathering using advanced mobile technologies across all regions.",
     capabilities: [
       "Large-scale surveys",
       "Facility assessments",
@@ -31,15 +35,17 @@ export const services = [
       "Real-time monitoring",
     ],
     tools: ["KoboToolbox", "ODK", "Mobile Forms"],
-    icon: "MapPin",
+    icon: "Database",
   },
   {
     id: "analytics",
     label: "ANALYTICS",
     title: "Data Processing & Analysis",
     shortTitle: "Analytics",
-    description: "Transform raw data into actionable insights through professional cleaning, statistical analysis, and compelling visualization.",
-    shortDescription: "Transforming raw data into actionable insights through rigorous statistical and thematic analysis.",
+    description:
+      "Transform raw data into actionable insights through professional cleaning, statistical analysis, and compelling visualization.",
+    shortDescription:
+      "Transforming raw data into actionable insights through rigorous statistical and thematic analysis.",
     capabilities: [
       "Data cleaning & validation",
       "Descriptive statistics",
@@ -55,8 +61,10 @@ export const services = [
     label: "TECHNOLOGY",
     title: "Technology Solutions",
     shortTitle: "Technology",
-    description: "Custom digital platforms that streamline data workflows and improve decision-making for your organization.",
-    shortDescription: "Custom dashboards, GIS mapping, and M&E systems designed for reliable field deployment.",
+    description:
+      "Custom digital platforms that streamline data workflows and improve decision-making for your organization.",
+    shortDescription:
+      "Custom dashboards, GIS mapping, and M&E systems designed for reliable field deployment.",
     capabilities: [
       "Online survey systems",
       "Client reporting portals",
@@ -65,6 +73,6 @@ export const services = [
       "IT governance advisory",
     ],
     tools: ["Python", "Django", "PostgreSQL", "Web APIs"],
-    icon: "Monitor",
+    icon: "Cpu",
   },
 ];

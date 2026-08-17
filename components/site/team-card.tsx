@@ -11,19 +11,27 @@ interface TeamCardProps {
   initials: string;
 }
 
-export function TeamCard({ name, role, description, image, initials }: TeamCardProps) {
+export function TeamCard({
+  name,
+  role,
+  description,
+  image,
+  initials,
+}: TeamCardProps) {
   const [imageError, setImageError] = useState(false);
   const showImage = Boolean(image) && !imageError;
 
   return (
-    <div className="card-base card-hover flex flex-col overflow-hidden p-0">
-      <div className="relative w-full aspect-[4/5] bg-emerald-tint">
+    <div className="group relative overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.08)] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(15,23,42,0.15)] hover:border-emerald/40">
+      
+      {/* Large Image */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-emerald-50">
         {showImage ? (
           <Image
             src={image as string}
             alt={name}
             fill
-            className="object-cover"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
             onError={() => setImageError(true)}
           />
         ) : (
@@ -32,12 +40,24 @@ export function TeamCard({ name, role, description, image, initials }: TeamCardP
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-2 p-6">
-        <h4 className="text-[16px] font-semibold text-navy">{name}</h4>
-        <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-emerald">
+
+      {/* Text */}
+      <div className="flex flex-col items-center text-center gap-1.5 px-5 py-5">
+        <h4 className="text-[17px] sm:text-[18px] font-semibold text-navy transition-colors duration-300 group-hover:text-emerald">
+          {name}
+        </h4>
+
+        <p className="text-[13px] font-medium text-warmgray">
           {role}
-        </span>
-        <p className="text-[14px] text-warmgray leading-relaxed">{description}</p>
+        </p>
+
+        {/* Description */}
+        <p className="mt-2 text-[13px] sm:text-[14px] text-warmgray leading-relaxed">
+          {description}
+        </p>
+
+
+       
       </div>
     </div>
   );
