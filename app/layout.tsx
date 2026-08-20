@@ -13,9 +13,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CK Data & Analytics — Evidence for Progress",
+  metadataBase: new URL("https://ckdatamw.org"),
+
+  title: {
+    default: "CK Data & Analytics : Evidence for Progress",
+    template: "%s : CK Data & Analytics",
+  },
+
   description:
     "Professional research, data collection, and analytics solutions for organizations driving development in Malawi.",
+
   keywords: [
     "research",
     "data collection",
@@ -25,12 +32,74 @@ export const metadata: Metadata = {
     "baseline studies",
     "data analysis",
   ],
+
+  authors: [{ name: "CK Data & Analytics" }],
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  alternates: {
+    canonical: "/",
+  },
+
+  // Website favicon / browser tab icon
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+
   openGraph: {
-    title: "CK Data & Analytics — Evidence for Progress",
+    title: "CK Data & Analytics : Evidence for Progress",
     description:
       "Professional research and data solutions for government, NGOs, and private sector in Malawi.",
+    url: "https://ckdatamw.org",
+    siteName: "CK Data & Analytics",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "CK Data & Analytics",
+      },
+    ],
+    locale: "en_US",
     type: "website",
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "CK Data & Analytics : Evidence for Progress",
+    description:
+      "Professional research, data collection, and analytics solutions for organizations driving development in Malawi.",
+    images: ["/og-image.png"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "CK Data & Analytics",
+  url: "https://ckdatamw.org",
+
+  // Actual company logo
+  logo: "https://ckdatamw.org/logo.png",
+
+  description:
+    "Professional research, data collection, and analytics solutions for organizations driving development in Malawi.",
+
+  email: "ckdataanalytics@gmail.com",
+  telephone: "+265991127401",
+
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Blantyre",
+    addressCountry: "MW",
+  },
+
+  sameAs: ["https://linkedin.com/company/ckdataanalytics"],
 };
 
 export default function RootLayout({
@@ -40,10 +109,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        {/* Organization structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+      </head>
+
       <body className="font-sans antialiased bg-paper text-charcoal">
         <Preloader />
+
         <Navbar />
+
         <main>{children}</main>
+
         <Footer />
 
         {/* Chatbase Widget */}
@@ -65,6 +147,7 @@ export default function RootLayout({
                     }
                   })
                 }
+
                 const onLoad=function(){
                   const script=document.createElement("script");
                   script.src="https://www.chatbase.co/embed.min.js";
@@ -72,8 +155,12 @@ export default function RootLayout({
                   script.domain="www.chatbase.co";
                   document.body.appendChild(script)
                 };
-                if(document.readyState==="complete"){onLoad()}
-                else{window.addEventListener("load",onLoad)}
+
+                if(document.readyState==="complete"){
+                  onLoad()
+                } else {
+                  window.addEventListener("load",onLoad)
+                }
               })();
             `,
           }}
